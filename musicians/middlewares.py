@@ -6,7 +6,31 @@
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from scrapy.http import HtmlResponse
+from scrapy.exceptions import IgnoreRequest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
 
+class PhantomJSMiddleware(object):
+    def process_request(self, request, spider):
+        driver = webdriver.Chrome(executable_path='webdrivers/chromedriver')
+        driver.get(request.url)
+        time.sleep(2)
+        body = driver.page_source
+        # driver.close()
+        return HtmlResponse(driver.current_url, body=body, encoding='utf-8', request=request)
+        
+        # try:
+        #     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="SITE_CONTAINER" and text() != ""]')))
+        # except Exception as e:
+        #     raise IgnoreRequest
+        # finally:
+        #     body = driver.page_source
+        #     driver.close()
+        #     return Response(driver.current_url, body=body, encoding='utf-8', request=request)
 
 class MusiciansSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,

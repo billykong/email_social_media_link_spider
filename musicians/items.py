@@ -10,5 +10,11 @@ import scrapy
 
 class MusiciansItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    email = scrapy.Field()
+    url = scrapy.Field()
+    mailto = scrapy.Field()
+    subject = scrapy.Field()
+
+class SocialMediaLinkItem(scrapy.Item):
+    desc = scrapy.Field()
+    url = scrapy.Field()
