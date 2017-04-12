@@ -16,7 +16,17 @@ import time
 
 class PhantomJSMiddleware(object):
     def process_request(self, request, spider):
-        driver = webdriver.Chrome(executable_path='webdrivers/chromedriver')
+        PROXY = 'localhost:9150'
+        # service_args = [ '--proxy=localhost:9150', '--proxy-type=socks5', ]
+        # driver_path = '/Users/billykong/workspace/github/scrapper/webdriver/phantomjs-2.1.1-macosx/bin/phantomjs'
+        # driver = webdriver.PhantomJS(executable_path=driver_path, service_args=service_args)
+        driver_path = 'webdrivers/chromedriver'
+        # driver = webdriver.Chrome(executable_path=driver_path, service_args=service_args)
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--proxy-server=socks5://%s' % PROXY)
+        driver = webdriver.Chrome(executable_path=driver_path, chrome_options=chrome_options)
+
+
         driver.get(request.url)
         time.sleep(2)
         body = driver.page_source
