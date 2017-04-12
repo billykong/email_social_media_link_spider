@@ -1,0 +1,5 @@
+Inspiration:
+https://www.upwork.com/jobs/_~0148b2283c68400cc0/
+
+
+scrapy crawl email_spider -a start_url='http://codingboar.com' -o scraped.json

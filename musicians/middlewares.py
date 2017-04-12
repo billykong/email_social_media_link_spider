@@ -20,17 +20,7 @@ class PhantomJSMiddleware(object):
         driver.get(request.url)
         time.sleep(2)
         body = driver.page_source
-        # driver.close()
         return HtmlResponse(driver.current_url, body=body, encoding='utf-8', request=request)
-        
-        # try:
-        #     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="SITE_CONTAINER" and text() != ""]')))
-        # except Exception as e:
-        #     raise IgnoreRequest
-        # finally:
-        #     body = driver.page_source
-        #     driver.close()
-        #     return Response(driver.current_url, body=body, encoding='utf-8', request=request)
 
 class MusiciansSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,

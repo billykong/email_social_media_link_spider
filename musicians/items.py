@@ -8,7 +8,7 @@
 import scrapy
 
 
-class MusiciansItem(scrapy.Item):
+class EmailItem(scrapy.Item):
     # define the fields for your item here like:
     email = scrapy.Field()
     url = scrapy.Field()

@@ -1,4 +1,4 @@
 *.pyc
 log.txt
-.DS_Store
+**.DS_Store
 scraped.json
