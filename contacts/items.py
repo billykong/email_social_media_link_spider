@@ -15,6 +15,7 @@ class EmailItem(scrapy.Item):
     mailto = scrapy.Field()
     subject = scrapy.Field()
 
+
 class SocialMediaLinkItem(scrapy.Item):
     desc = scrapy.Field()
     media_url = scrapy.Field()

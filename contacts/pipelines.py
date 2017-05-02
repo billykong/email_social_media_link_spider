@@ -8,6 +8,7 @@
 import pymongo
 import logging
 
+
 class MongoPipeline(object):
 
     collection_name = 'scrapy_items'
@@ -33,6 +34,9 @@ class MongoPipeline(object):
 
     def process_item(self, item, spider):
         item_name = type(item).__name__
-        logging.info('................Pipeline Processing: ' + item_name + '................')
+        logging.info(
+            '................Pipeline Processing: ' +
+            item_name +
+            '................')
         self.db[item_name].insert(dict(item))
         return item

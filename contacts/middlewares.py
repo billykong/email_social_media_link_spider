@@ -14,6 +14,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
+
 class ChromeMiddleware(object):
     def __init__(self, proxyUri):
         self.proxyUri = proxyUri
@@ -24,7 +25,9 @@ class ChromeMiddleware(object):
         driver_path = 'webdrivers/chromedriver'
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--proxy-server=socks5://%s' % PROXY)
-        driver = webdriver.Chrome(executable_path=driver_path, chrome_options=chrome_options)
+        driver = webdriver.Chrome(
+            executable_path=driver_path,
+            chrome_options=chrome_options)
 
         # Uncomment to use PhantomJS instead
         # service_args = [ '--proxy=localhost:9150', '--proxy-type=socks5', ]
@@ -34,13 +37,15 @@ class ChromeMiddleware(object):
         driver.get(request.url)
         time.sleep(2)
         body = driver.page_source
-        return HtmlResponse(driver.current_url, body=body, encoding='utf-8', request=request)
+        return HtmlResponse(driver.current_url, body=body,
+                            encoding='utf-8', request=request)
 
     @classmethod
     def from_crawler(cls, crawler):
         # This method is used by Scrapy to create your spiders.
         proxyUri = crawler.settings.get('TOR_SOCK_URI')
         return cls(proxyUri)
+
 
 class ContactsSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,

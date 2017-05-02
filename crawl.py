@@ -5,4 +5,4 @@ process = CrawlerProcess(get_project_settings())
 
 # 'followall' is the name of one of the spiders of the project.
 process.crawl('email_spider', start_url='http://codingboar.com')
-process.start() # the script will block here until the crawling is finished
+process.start()  # the script will block here until the crawling is finished
