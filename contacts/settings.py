@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for musicians project
+# Scrapy settings for contacts project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'musicians'
+BOT_NAME = 'contacts'
 
-SPIDER_MODULES = ['musicians.spiders']
-NEWSPIDER_MODULE = 'musicians.spiders'
+SPIDER_MODULES = ['contacts.spiders']
+NEWSPIDER_MODULE = 'contacts.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'musicians (+http://www.yourdomain.com)'
+#USER_AGENT = 'contacts (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -47,13 +47,13 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'musicians.middlewares.MusiciansSpiderMiddleware': 543,
+#    'contacts.middlewares.ContactsSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   'musicians.middlewares.PhantomJSMiddleware': 543,
+   'contacts.middlewares.ChromeMiddleware': 543,
 }
 
 # Enable or disable extensions
@@ -65,7 +65,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'musicians.pipelines.MongoPipeline': 300,
+   'contacts.pipelines.MongoPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -94,4 +94,10 @@ ITEM_PIPELINES = {
 # MongoDB
 MONGO_URI = 'localhost:27017'
 MONGO_DATABASE = 'scraping'
+
+# TOR
+TOR_SOCK_URI = 'localhost:9150'
+
+# Social media links to scrape
+SOCIAL_MEDIA_LIST = ['twitter', 'facebook', 'linkedin', 'github']
 

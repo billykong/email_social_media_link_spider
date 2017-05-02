@@ -17,4 +17,5 @@ class EmailItem(scrapy.Item):
 
 class SocialMediaLinkItem(scrapy.Item):
     desc = scrapy.Field()
-    url = scrapy.Field()
+    media_url = scrapy.Field()
+    site_url = scrapy.Field()

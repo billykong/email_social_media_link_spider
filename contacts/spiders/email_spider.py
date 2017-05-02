@@ -3,7 +3,7 @@ import scrapy
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from bs4 import BeautifulSoup
-from musicians.items import EmailItem, SocialMediaLinkItem
+from contacts.items import EmailItem, SocialMediaLinkItem
 import re
 from urllib import parse
 import logging
@@ -36,17 +36,19 @@ class EmailSpider(CrawlSpider):
         logging.info(item)
       items.append(item)
 
+    socialMediaList = self.settings.get('SOCIAL_MEDIA_LIST')
     sociaLinks = [a["href"] for a in soup.select('a[href]')]
     for link in sociaLinks:
-      socialItem = SocialMediaLinkItem()
-      if "twitter" in link:
-        socialItem["desc"] = "twitter"
-        socialItem["url"] = link
-        items.append(socialItem)
-      elif "facebook" in link:
-        socialItem["desc"] = "facebook"
-        socialItem["url"] = link
-        items.append(socialItem)
+      parsed_uri = parse.urlparse(link)
+      domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
+      for keyword in socialMediaList:
+        if keyword in domain:
+          socialItem = SocialMediaLinkItem()
+          socialItem["desc"] = keyword
+          socialItem["media_url"] = link
+          socialItem["site_url"] = response.url
+          items.append(socialItem)
+          break
     return items
 
 
